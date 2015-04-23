@@ -14,14 +14,14 @@ Several steps are based on prior work by Joe Hiatt
 
 A construct created by comparing multiple reads and deciding ambiguities by
 simple majority.  SSCSs are created by *ConsensusMaker.py*.  Quality scores
-attached to SSCSs are meaningless. although the cigar strings still have
+attached to SSCSs are meaningless, although the cigar strings still have
 meaning.
 
 ### Duplex Consensus Sequence (DCS)
 
 A construct created by comparing two SSCSs.  Quality scores and cigar strings
 attached to DCS sequences are meaningless, though cigar strings regain meaning
-after reallignment.
+after realignment.
 
 ### Duplex tag
 
@@ -42,8 +42,8 @@ read has not yet been modified by *tag_to_header.py*, while an SMI read has.
 These programs are meant to be run in order and result in the transformation of
 two input FASTQ files from an Illumina sequencing run into a paired-end BAM
 file containing the final DCS reads.  This workflow will also generate a file
-containing a list of every tag that is present and how many times it occured,
-as well as file containing SSCSs that didn't have a mate and were unable to
+containing a list of every tag that is present and how many times it occurred,
+as well as a file containing SSCSs that didn't have a mate and were unable to
 make a DCS (extraConsensus.bam).
 
 ## Dependencies
@@ -140,9 +140,10 @@ should run the rest of the process through to an output paired-end BAM file,
 copying the contents of stderr to a log file for documentation and reporting
 purposes.
 
-It is strongly sugested that the final sorted BAM file undergo post-processing
+It is strongly sugested that the final sorted BAM file undergo end-clipping
 with picard-tools-1.70/AddOrReplaceReadGroups.jar and
-GATK/GenomeAnalysisTK.jar, before generating statistics.
+GATK/GenomeAnalysisTK.jar, before generating statistics.  Please see the Nature
+Protocols paper for details on how this is done.
 
 ## Data Outputs
 
