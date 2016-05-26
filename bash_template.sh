@@ -99,7 +99,7 @@ bwa sampe -s $alignRef ${runIdentifier}.seq1.aln ${runIdentifier}.seq2.aln ${run
 echo "Sorting aligned sequences" | tee -a ${logFile}
 date | tee -a ${logFile}
 
-samtools view -Sbu ${runIdentifier}.pe.sam | samtools sort -o ${runIdentifier}.pe.sort.bam
+samtools view -Sbu ${runIdentifier}.pe.sam | samtools sort - ${runIdentifier}.pe.sort
 
 # Step 5: Run Consensus Maker
 echo "Starting Consensus Maker" | tee -a ${logFile}
@@ -111,7 +111,7 @@ python ${DSpath}/ConsensusMaker.py --infile ${runIdentifier}.pe.sort.bam --tagfi
 echo "Sorting SSCSs" | tee -a ${logFile}
 date | tee -a ${logFile}
 
-samtools view -bu ${runIdentifier}.sscs.bam | samtools sort -o ${runIdentifier}.sscs.sort.bam
+samtools view -bu ${runIdentifier}.sscs.bam | samtools sort - ${runIdentifier}.sscs.sort
 
 # Step 7: Run Duplex Maker
 echo "Starting Duplex Maker" | tee -a ${logFile}
@@ -131,7 +131,7 @@ bwa sampe -s $alignRef ${runIdentifier}.dcs.r1.aln ${runIdentifier}.dcs.r2.aln $
 echo "Sorting aligned DCSs" | tee -a ${logFile}
 date | tee -a ${logFile}
 
-samtools view -Sbu ${runIdentifier}.dcs.sam | samtools sort -o ${runIdentifier}.dcs.aln.sort.bam
+samtools view -Sbu ${runIdentifier}.dcs.sam | samtools sort - ${runIdentifier}.dcs.aln.sort
 
 # Step 10: Index sorted DCSs
 echo "Indexing sorted DCSs" | tee -a ${logFile}
